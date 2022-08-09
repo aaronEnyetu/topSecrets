@@ -12,20 +12,20 @@ CREATE TABLE users (
     password_hash TEXT NOT NULL
 );
 
--- CREATE TABLE secrets (
---     id BIGINT GENERATED ALWAYS AS IDENTINTY PRIMARY KEY,
---     title TEXT NOT NULL,
---     description TEXT NOT NULL,
---     created_at TIMESTAMP
--- );
+CREATE TABLE secrets (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP
+);
 
--- INSERT INTO secrets (
---     title,
---     description,
---     created_at
--- )
+INSERT INTO secrets (
+    title,
+    description,
+    created_at
+)
 
--- VALUES
--- ('TOP SECRET', 'confidential information is hidden in the folder', CURRENT_TIMESTAMP),
--- ('PROJECT SECRET', 'not to be revealed', CURRENT_TIMESTAMP),
--- ('VERIFIED', 'agent meeting begins promptly at 1600 hours', CURRENT_TIMESTAMP);
+VALUES
+('TOP SECRET', 'confidential information is hidden in the folder', CURRENT_TIMESTAMP),
+('PROJECT SECRET', 'not to be revealed', CURRENT_TIMESTAMP),
+('VERIFIED', 'agent meeting begins promptly at 1600 hours', CURRENT_TIMESTAMP);
