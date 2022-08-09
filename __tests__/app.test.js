@@ -90,5 +90,13 @@ describe('backend-express-template routes', () => {
     expect(res.body).toEqual([{ ...user }]);
   });
 
+  it('should logout a user', async () => {
+    const res = await request(app).delete('/api/v1/users/sessions');
+
+    expect(res.status).toEqual(200);
+    expect(res.body.message).toEqual('Signed out successfully');
+  });
+
+
 
 });
