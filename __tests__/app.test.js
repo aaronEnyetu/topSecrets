@@ -59,6 +59,7 @@ describe('backend-express-template routes', () => {
 
     expect(me.body).toEqual({
       ...user,
+      id: expect.any(String),
       exp: expect.any(Number),
       iat: expect.any(Number),
     });
@@ -84,10 +85,10 @@ describe('backend-express-template routes', () => {
   });
 
   it('should return a list of users if signed in as admin', async () => {
-    const [agent, user] = await registerAndLogin({ email: 'admin' });
+    const [agent] = await registerAndLogin({ email: 'admin' });
     const res = await agent.get('/api/v1/users');
 
-    expect(res.body).toEqual([{ ...user }]);
+    expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ email: expect.any(String), firstName: expect.any(String), lastName: expect.any(String) })]));
   });
 
   it('should logout a user', async () => {
@@ -97,6 +98,14 @@ describe('backend-express-template routes', () => {
     expect(res.body.message).toEqual('Signed out successfully');
   });
 
-
+  it('should return a list of secrets to authenticated users', async () => {
+    const [agent] = await registerAndLogin();
+    const res = await agent.get('/api/v1/secrets');
+    expect(res.body.length).toEqual(3);
+  });
 
 });
+
+
+
+
