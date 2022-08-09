@@ -45,7 +45,6 @@ describe('backend-express-template routes', () => {
     const res = await request(app).post('/api/v1/users').send(demoUser);
     const { firstName, lastName, email } = demoUser;
 
-
     expect(res.body).toEqual({
       id: expect.any(String),
       firstName,
@@ -64,4 +63,14 @@ describe('backend-express-template routes', () => {
       iat: expect.any(Number),
     });
   });
+
+  it('should return a 401 when signed out and listing all users', async () => {
+    const res = await request(app).get('/api/v1/users');
+
+    expect(res.body).toEqual({
+      message: 'You must be signed in to continue',
+      status: 401,
+    });
+  });
+
 });
